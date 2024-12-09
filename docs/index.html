@@ -12,9 +12,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,500&display=swap" rel="stylesheet">
 
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="./static/css/prism.css"/>
-  <link rel="stylesheet" href="plugins/line-highlight/prism-line-highlight.css" data-noprefix="">
-  <link rel="stylesheet" href="plugins/diff-highlight/prism-diff-highlight.css" data-noprefix="">
+  <!-- <link rel="stylesheet" href="plugins/line-highlight/prism-line-highlight.css" data-noprefix=""> -->
+  <!-- <link rel="stylesheet" href="plugins/diff-highlight/prism-diff-highlight.css" data-noprefix=""> -->
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
@@ -22,6 +21,14 @@
 
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <style>
+          /* Force normal size for numbers */
+    code[class*="language-"] .token.number {
+      font-size: 1em !important;
+      line-height: 1.4 !important;
+    }
+  </style>
 
   <!-- Custom CSS -->
   <style>
@@ -89,10 +96,10 @@
       background-color: #4A6FA5;
       color: white;
     }
-    .button.is-dark {
+    /* .button.is-dark {
       background-color: #2C3E50;
       color: white;
-    }
+    } */
     .button.is-warning {
       background-color: #E67E22;
       color: white;
@@ -115,6 +122,9 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <!-- Bulma Accordion (for tabs) -->
   <script src="https://cdn.jsdelivr.net/npm/bulma-accordion@2.0.3/dist/js/bulma-accordion.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <link rel="stylesheet" href="./static/css/prism.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
 </head>
 <body>
 
@@ -139,25 +149,25 @@
         <br>
         <!-- Updated Action Buttons with new design -->
         <p class="buttons is-centered">
-          <a href="https://arxiv.org/abs/xxxx.xxxxx" class="button is-info is-rounded">
+          <a href="https://arxiv.org/abs/2412.0xxx" class="button is-dark is-rounded">
             <span class="icon">
               <i class="ai ai-arxiv"></i>
             </span>
             <span>Paper</span>
           </a>
-          <a href="https://github.com/AlphaVerus/AlphaVerus" class="button is-dark is-rounded">
+          <a href="https://github.com/cmu-l3/alphaverus" class="button is-dark is-rounded">
             <span class="icon"><i class="fab fa-github"></i></span>
             <span>Code</span>
           </a>
-          <a href="#performance-highlights" class="button is-warning is-rounded">
+          <a href="#performance-highlights" class="button is-dark is-rounded">
             <span class="icon"><i class="fas fa-chart-bar"></i></span>
             <span>Results</span>
           </a>
-          <a href="#example1" class="button is-primary is-rounded">
+          <a href="#example1" class="button is-dark is-rounded">
             <span class="icon"><i class="fas fa-code"></i></span>
             <span>AlphaVerus in Action</span>
           </a>
-          <a href="mailto:pranjala@cs.cmu.edu" class="button is-link is-rounded">
+          <a href="mailto:pranjala@cs.cmu.edu" class="button is-dark is-rounded">
             <span class="icon"><i class="fas fa-envelope"></i></span>
             <span>Contact</span>
           </a>
@@ -169,7 +179,7 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="subtitle has-text-centered"><span style="font-weight:bold;">TLDR:</span> <strong>AlphaVerus</strong> leverages <strong>self-improvement</strong> and formal verification to generate <strong>provably correct code</strong>. It translates from known verified sources, refines code via <strong>"tree search"</strong>, and prevents <strong>"reward hacking"</strong> with a <strong>critique step</strong>, achieving robust verified code generation in real-world languages like <strong>Rust (Verus)</strong>.</h2>
+    <h2 class="subtitle has-text-centered"><span style="font-weight:bold;">TLDR:</span> <strong>AlphaVerus</strong> leverages <strong>self-improvement</strong> and formal verification to generate <strong>provably correct code</strong>. It translates from known verified sources, refines code via <strong>tree search</strong>, and prevents <strong>reward hacking</strong> with a <strong>critique step</strong>, achieving robust <strong>verified code generation</strong> in real-world languages like Rust (Verus).</h2>
   </div>
 </section>
 
@@ -179,7 +189,7 @@
     <div class="content">
       <h2 class="title is-3">Why Formally Verified Code Generation?</h2>
       <p class="is-size-5">
-        While large language models (LLMs) have shown great promise in generating code, ensuring the correctness of generated code remains a significant challenge. Bugs and vulnerabilities can have serious consequences. Formal verification offers mathematical guarantees of correctness but is hindered by <strong>data scarcity</strong> and <strong>proof complexity</strong>.
+        While LLMs have shown great promise in generating code, ensuring the correctness of generated code remains a significant challenge. Bugs and vulnerabilities can have serious consequences. Formal verification offers mathematical guarantees of correctness but is hindered by <strong>data scarcity</strong> and <strong>proof complexity</strong>.
       </p>
     </div>
   </div>
@@ -217,7 +227,7 @@
             <li>🔑 <strong>Formal Guarantees:</strong> AlphaVerus integrates formal verification into code generation, ensuring mathematically guaranteed correctness.</li>
             <li>🚀 <strong>Self-Improvement:</strong> Iterative translation and refinement build a data collection loop that continuously improves generation quality without human intervention.</li>
             <li>🌳 <strong>Treefinement Algorithm:</strong> A novel tree-search-based refinement process fixes verification errors efficiently, surpassing linear refinement methods.</li>
-            <li>🛡 <strong>Preventing Reward Hacking:</strong> A critique step filters out trivial or misaligned specs, maintaining the integrity of the training cycle.</li>
+            <li>🛡 <strong>Preventing Reward Hacking:</strong> A critique step filters out trivial or misaligned specs, maintaining the integrity of the training cycle, which is crucial for the self-improvement loop.  </li>
             <li>📊 <strong>Strong Results:</strong> Achieves state-of-the-art verified code generation performance on HumanEval-Verus and MBPP-Verus benchmarks.</li>
           </ul>
         </div>
@@ -243,12 +253,12 @@
           <div class="content">
             <h3 class="title is-4 has-text-centered">Self-Improving Framework</h3>
             <p class="is-size-5">
-              AlphaVerus iteratively improves code generation by learning from translations and verifier feedback, without human intervention or model fine-tuning. This self-improvement allows it to handle increasingly complex code generation tasks.
+              AlphaVerus iteratively improves code generation by learning from translations and verifier feedback, without human intervention or model fine-tuning. This self-improvement allows it to handle increasingly complex verifiable code generation tasks.
             </p>
             <!-- Example or Visual -->
-            <!-- <figure class="image">
-              <img src="static/images/self_improvement.png" alt="Self-Improvement Process">
-            </figure> -->
+            <figure class="image">
+              <img src="static/images/alphaverus_diagram.png" alt="Self-Improvement Process">
+            </figure>
           </div>
         </div>
       </div>
@@ -262,9 +272,9 @@
               The novel Treefinement algorithm performs a tree search over program refinements using verifier feedback. It outperforms traditional linear refinement methods by prioritizing promising paths and efficiently finding verified programs.
             </p>
             <!-- Example or Visual -->
-            <!-- <figure class="image">
-              <img src="static/images/treefinement_diagram.png" alt="Treefinement Algorithm">
-            </figure> -->
+            <figure class="image">
+              <img src="static/images/treefinement.svg" alt="Treefinement Algorithm">
+            </figure>
           </div>
         </div>
       </div>
@@ -278,9 +288,9 @@
               AlphaVerus employs critique models to filter out misaligned specifications and trivial solutions that pass verification but don't fulfill the intended functionality, ensuring the correctness and reliability of generated code.
             </p>
             <!-- Example or Visual -->
-            <!-- <figure class="image">
-              <img src="static/images/reward_hacking.png" alt="Preventing Reward Hacking">
-            </figure> -->
+            <figure class="image">
+              <img src="static/images/critique.svg" alt="Preventing Reward Hacking">
+            </figure>
           </div>
         </div>
       </div>
@@ -307,8 +317,8 @@
           <!-- Example Content -->
           <div class="tab-content is-active" id="example1">
             <div class="example-box">
-              <p class="example-title">Multi-Stage Verification: Prime Number Functions</p>
-              <p class="is-size-6 mb-2">Demonstrates staged verification with helper functions and complex properties</p>
+              <p class="example-title">Multi-Function Verification: Prime Number Functions</p>
+              <p class="is-size-6 mb-2">Demonstrates verification of multiple related functions with helper functions</p>
               
               <p class="example-title">Stage 1: Prime Number Checker Specification</p>
               <pre><code class="language-rust">spec fn spec_prime_helper(num: int, limit: int) -> bool {
@@ -319,7 +329,7 @@ spec fn spec_prime(num: int) -> bool {
     spec_prime_helper(num, num)
 }
 
-fn is_prime(num: u32) -> bool
+fn is_prime(num: u32) -> (result: bool)
     requires
         num >= 2,
     ensures
@@ -344,7 +354,7 @@ result</code></pre>
             
             <div class="example-box">
               <p class="example-title">Stage 2: Largest Prime Factor Specification</p>
-              <pre><code class="language-rust">fn largest_prime_factor(n: u32) -> u32
+              <pre><code class="language-rust">fn largest_prime_factor(n: u32) -> (largest: u32)
     requires
         n >= 2,
     ensures
@@ -390,9 +400,9 @@ largest</code></pre>
         substring.len() > 0,
         string.len() >= substring.len(),
     ensures
-        (substring[0] == string.subrange(0, substring.len() as int)[0] && 
-        (substring.skip(1) =^= string.skip(1).subrange(0, substring.skip(1).len() as int))) 
-        ==> (substring =^= string.subrange(0, substring.len() as int)),
+        (substring[0] == string.subrange(0, substring.len() as int)[0] && (substring.skip(1)
+            =~= string.skip(1).subrange(0, substring.skip(1).len() as int))) ==> (substring
+            =~= string.subrange(0, substring.len() as int)),
     decreases substring.len(),</code></pre>
             </div>
             <div class="example-box">
@@ -412,25 +422,25 @@ if substring[0] == h[0] {
     assert(k == substring.len() - 1);
     assert(k == h.len() - 1);
     if m > 1 {
-        if substring.skip(1) =^= g {
+        if substring.skip(1) =~= g {
             assert(substring[0] == h[0]);
             assert(substring.len() == g.len() + 1);
             assert(substring.len() == h.len());
             assert(forall|i: nat| 0 <= i && i < m ==> substring[i as int] == h[i as int]) by {
                 assert(substring[0] == h[0]);
-                assert(substring.skip(1) =^= g);
+                assert(substring.skip(1) =~= g);
                 assert(forall|i: nat| 1 <= i && i < m ==> substring[i as int] == g[i as int - 1]);
-                assert(substring =^= h);
+                assert(substring =~= h);
             }
-            assert(substring =^= h);
+            assert(substring =~= h);
         } else {
-            assert(!(substring =^= h));
+            assert(!(substring =~= h));
         }
     } else {
-        assert(substring =^= h);
+        assert(substring =~= h);
     }
 } else {
-    assert(!(substring =^= h));
+    assert(!(substring =~= h));
 }</code></pre>
             </div>
           </div>
@@ -438,33 +448,53 @@ if substring[0] == h[0] {
             <div class="example-box">
               <p class="example-title">Translation Example: Dafny to Verus</p>
               <p class="is-size-6 mb-2">All Code is AlphaVerus-Generated</p>
-              <p class="example-title">Recursive Implementation</p>
-              <pre><code class="language-rust">fn search_recursive(a: &Vec<i32>, i: usize, j: usize, x: i32) -> (k: i32)
+              <p class="example-title">Translation of Recursive Implementation</p>
+              <pre><code class="language-rust">use vstd::prelude::*;
+
+verus! {
+fn search_recursive(a: &Vec<i32>, i: usize, j: usize, x: i32) -> (k: i32)
     requires
         0 <= i && i <= j && j <= a.len(),
         j - i < 100000,
         j <= i32::MAX as usize,
     ensures
-        i <= k && k <= j || k == -1,
+        i <= k && k < j || k == -1,
         k != -1 ==> a[k as int] == x,
         k != -1 ==> forall|r: nat| k < r && r < j ==> a[r as int] != x,
         k == -1 ==> forall|r: nat| i <= r && r < j ==> a[r as int] != x,
     decreases
-        j - i,</code></pre>
+        j - i,
+{
+    if j == i {
+        -1
+    } else if a[j - 1] == x {
+        assert(j - 1 <= i32::MAX as usize);
+        if j - 1 <= i32::MAX as usize {
+            (j - 1) as i32
+        } else {
+            -1
+        }
+    } else {
+        search_recursive(a, i, j - 1, x)
+    }
+}</code></pre>
             </div>
             <div class="example-box">
-              <p class="example-title">Translated Loop-Based Implementation</p>
+              <p class="example-title">Translation of Iterative Implementation</p>
               <pre><code class="language-rust">fn search_loop(a: &Vec<i32>, i: usize, j: usize, x: i32) -> (k: i32)
     requires
         0 <= i && i <= j && j <= a.len(),
         j - i < 100000,
         j <= i32::MAX as usize,
     ensures
-        i <= k && k <= j || k == -1,
+        i <= k && k < j || k == -1,
         k != -1 ==> a[k as int] == x,
         k != -1 ==> forall|r: nat| k < r && r < j ==> a[r as int] != x,
         k == -1 ==> forall|r: nat| i <= r && r < j ==> a[r as int] != x,
 {
+    if i == j {
+        return -1;
+    }
     let mut t: usize = j;
     while t > i
         invariant
@@ -475,6 +505,7 @@ if substring[0] == h[0] {
         decreases
             t,
     {
+        assert(t <= a.len());
         if a[t - 1] == x {
             if t - 1 <= i32::MAX as usize {
                 return (t - 1) as i32;
@@ -482,6 +513,7 @@ if substring[0] == h[0] {
                 return -1;
             }
         } else {
+            assert(t > i);
             t = t - 1;
         }
     }
@@ -515,7 +547,7 @@ if substring[0] == h[0] {
               AlphaVerus achieves significant improvements in generating formally verified code, outperforming existing methods including GPT-4. Our framework reaches 38% success rate on HumanEval-Verified, setting a new benchmark for verified code generation.
             </p>
             <figure class="image">
-              <img src="static/images/results_1_1.png" alt="Performance Chart">
+              <img src="static/images/results_1_2.png" alt="Performance Chart">
             </figure>
           </div>
         </div>
@@ -565,7 +597,7 @@ if substring[0] == h[0] {
       year={2024},
       eprint={xxxxx.xxxxx},
       archivePrefix={arXiv},
-      primaryClass={cs.SE}
+      primaryClass={cs.ML}
 }</code></pre>
   </div>
 </section>
@@ -602,19 +634,23 @@ print(verified_code)</code></pre>
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      <strong>AlphaVerus</strong> by <a href="https://pranjal2041.github.io">Pranjal Aggarwal</a>, <a href="#">Bryan Parno</a>, and <a href="https://sweller123.github.io/">Sean Welleck</a>.
+      <strong>AlphaVerus</strong> by <a href="https://pranjal2041.github.io">Pranjal Aggarwal</a>, <a href="https://www.andrew.cmu.edu/user/bparno/">Bryan Parno</a>, and <a href="https://wellecks.com//">Sean Welleck</a>.
     </p>
     <p>
-      <a href="https://arxiv.org/abs/xxxx.xxxxx" class="icon">
+      <a href="https://arxiv.org/abs/2412.0xxx" class="icon">
         <i class="fas fa-file-alt"></i>
       </a>
       &nbsp;
-      <a href="https://github.com/AlphaVerus/AlphaVerus" class="icon">
+      <a href="https://github.com/cmu-l3/alphaverus" class="icon">
         <i class="fab fa-github"></i>
       </a>
     </p>
+    <br>
+    <br>
     <p>
-      Template built with <a href="https://bulma.io/">Bulma</a>.
+      Template adapted from <a href="http://nerfies.github.io/">Nerfies</a> by Keunhong Park et
+      al.
+      and uses <a href="https://bulma.io/">Bulma</a>.
     </p>
   </div>
 </footer>
